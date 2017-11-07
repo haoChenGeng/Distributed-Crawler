@@ -1,0 +1,58 @@
+.vertical-center-modal {
+  text-align: center;
+  white-space: nowrap;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+  }
+  .ant-modal {
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+  }
+}
+/*
+// Use flex which not working in IE
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-center-modal .ant-modal {
+  top: 0;
+}
+*/
+
+// hcg add
+.modal-module {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.modal-name {
+  width: 40%;
+  text-align: right;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.interface-row {
+  .ant-col-md-12 {
+    line-height: 30px;
+  }
+}
+
+.interface-modal {
+  .ant-modal-body {
+    padding: 25px;
+  }  
+}
+
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav .ant-tabs-tab-active {
+  color: @crawlerColor
+}
