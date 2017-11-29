@@ -1,17 +1,22 @@
 import React from 'react';
+import axios from 'axios'
 import { Table, Icon, Row, Col, Card, Modal, Menu, Dropdown, Button } from 'antd';
 import { Link } from 'react-router';
+
+import { createHistory } from 'history';
+import * as Http from '../../axios/tools';
+
 
 class CrawlerListTable extends React.Component {  
   constructor(props) {
     super(props);
     this.operate = {};
-    const menu = <Menu onClick={this.operateCrawler} className="crawler-operation" >
+    const menu = <Menu onClick={this.operateCrawler.bind(this)} className="crawler-operation" >
                     <Menu.Item key="start" data={this.props}>启动</Menu.Item>
                     <Menu.Item key="stop">停止</Menu.Item>
                     <Menu.Item key="delete">删除</Menu.Item>
                 </Menu>
-    this.worker = {
+    this.state = {
       "pagination": {
         "pages": 10,
         "total": 104,
@@ -20,68 +25,64 @@ class CrawlerListTable extends React.Component {
       },
       "result": [
         {
-          "workerId": "12-34",
-          "runSystem": "Windows",
-          "systemIp": "10.8.23.1",
-          "contextPath": "xxx/test",
-          "workerType": "通用爬虫1",
-          "systemHost": "CRAWLER-1",
-          "startTime": "2017-10-10 10:11:11",
-          "lastHeartbeatTime": "2017-10-10 10:11:11",
-          "status": "运行"
+          "spiderUUID":"123",
+          "spiderName":"string",
+          "user":"string",
+          "project":"string",
+          "isExplorer":true,
+          "statusDesc":"停止",
+          "createTime":"2017-10-25 16:30:25",
         }, {
-          "workerId": "56-78",
-          "runSystem": "Windows",
-          "systemIp": "10.8.23.1",
-          "contextPath": "xxx/test",
-          "workerType": "通用爬虫2",
-          "systemHost": "CRAWLER-1",
-          "startTime": "2017-10-10 10:11:11",
-          "lastHeartbeatTime": "2017-10-10 10:11:11",
-          "status": "运行"
+          "spiderUUID":"string1",
+          "spiderName":"string",
+          "user":"string",
+          "project":"string",
+          "isExplorer":true,
+          "statusDesc":"停止",
+          "createTime":"2017-10-25 16:30:25",
         }
-      ]
+      ],
     }
     this.columns = [{
       title: 'UUID',
-      dataIndex: 'workerId',
-      key: 'workerId',
+      dataIndex: 'spiderUUID',
+      key: 'spiderUUID',
       width: '10%',
       render: (text, record, index) => { return text },
     }, {
       title: '名称',
-      dataIndex: 'workerType',
-      key: 'workerType',
+      dataIndex: 'spiderName',
+      key: 'spiderName',
       width: '15%',
       render: (text, record, index) => { return text },
     }, {
       title: '所属用户',
-      dataIndex: 'systemIp',
-      key: 'systemIp',
+      dataIndex: 'user',
+      key: 'user',
       width: '10%',
       render: (text, record, index) => { return text },
     },{
       title: '所属项目',
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'project',
+      key: 'project',
       width: '10%',
       render: (text, record, index) => { return text },
     },{
       title: '运行模式',
-      dataIndex: 'runSystem',
-      key: 'runSystem',
+      dataIndex: 'isExplorer',
+      key: 'isExplorer',
       width: '10%',
       render: (text, record, index) => { return text },
     },{
       title: '运行状态',
-      dataIndex: 'startTime',
-      key: 'startTime',
+      dataIndex: 'statusDesc',
+      key: 'statusDesc',
       width: '15%',
       render: (text, record, index) => { return text },
     },{
       title: '创建时间',
-      dataIndex: 'lastHeartbeatTime',
-      key: 'lastHeartbeatTime',
+      dataIndex: 'createTime',
+      key: 'createTime',
       width: '15%',
       render: (text, record, index) => { return text },
     }, {
@@ -93,8 +94,8 @@ class CrawlerListTable extends React.Component {
         return (
           <div className="editable-row-operations">
             <span>
-              <Link to={'/app/crawler/crawlerDetail'} className="table-action">查看</Link> |  &nbsp;
-              <Link to={'/app/crawler/crawlerInstance'} className="table-action">运行实例</Link> |  &nbsp;
+              <Link to={'/app/crawler/crawlerDetail'}   className="table-action">查看</Link> |  &nbsp;
+              <Link to={{ pathname: '/app/crawler/crawlerInstance', query: { name: record.spiderUUID } }} className="table-action">运行实例</Link> |  &nbsp;
               <Link to={'/app/crawler/crawlerTaskList'} className="table-action">任务列表</Link> | <Dropdown onVisibleChange={this.checkFirstTag.bind(this,record)} overlay={menu} >
                                                                                                     <Button className="crawler-operation table-action">
                                                                                                       更多
@@ -107,19 +108,31 @@ class CrawlerListTable extends React.Component {
       },
     }];    
   }  
+  componentDidMount() {
+    const head = {'head': '123'}
+    Http.get({
+      url: 'api/spider/list',
+      data: {        
+        pageNum: 1,
+        pageSize: 10        
+      },
+      headers: head
+    })
+    .then(res => console.log(res));    
+  }
   
   operateCrawler(e) {
     console.log(e.key);    
+    console.log(this.operate);
   }
   checkFirstTag(obj,data) {
-    // console.log(obj);
-    // console.log(data);
+    console.log(obj);
+    console.log(data);
     if (data) {
       this.operate = obj;
     }else {
       this.operate = {};
     }
-    console.log(this.operate);
   } 
   showWorkerDetail(record) {
     // console.log(record);
@@ -160,8 +173,10 @@ class CrawlerListTable extends React.Component {
       okText: '确定'
     })
   }
+
+  
   render() {
-    const data = this.worker.result;
+    const data = this.state.result;
     /* const dataSource = data.map((item) => {
       const obj = {};
       Object.keys(item).forEach((key) => {
@@ -170,13 +185,14 @@ class CrawlerListTable extends React.Component {
       return obj;
     }); */
     const dataSource = data.map((item) => {
-      item['key'] = item.workerId;
+      item['key'] = item.spiderUUID;
       return item;
     });
     return <Table className="crawler-table" dataSource={dataSource} columns={this.columns} />;
   }
 }
-
+// let pagination = this.state.pagination;
+// const {pagination} = this.state;
 const CrawlerList = () => (
   <div className="gutter-example">
     <Row gutter={16}>

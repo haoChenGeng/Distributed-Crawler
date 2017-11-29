@@ -55,26 +55,6 @@ class IndexTable extends React.Component {
       okText: '确定'
     })
   }
-  /* showCrawlerList(record) {
-    console.log(record);
-    let spider = ['1','2','3'];
-    Modal.info({
-      title: 'Worker详情',
-      content: (
-        <div className="modal-list">
-          <p>爬虫UUID</p>
-          {
-            record.spiderUUIDs.map((item) => {
-              return (
-                <p>{item} + '...'</p>
-              )
-            })
-          }
-        </div>
-      ),
-      okText: '确定'
-    })
-  } */
   render() {
     const data = this.worker.result;
     const dataSource = data.map((item) => {
@@ -83,7 +63,7 @@ class IndexTable extends React.Component {
     })
     const { columns } = this.props;
 
-    return <Table dataSource={dataSource} columns={columns} pagination={this.props.pagination} />;
+    return <Table dataSource={this.props.dataSource} columns={this.props.columns} pagination={this.props.pagination} />;
   }
 }
 

@@ -12,6 +12,8 @@ import img3 from '../../style/imgs/homeCard3.jpg';
 import img4 from '../../style/imgs/homeCard4.jpg';
 import Columns from './tableConfig';
 import Options from './chartConfig';
+// import Get from '../../axios/tools';
+import * as http from '../../axios/tools';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -19,6 +21,14 @@ class Dashboard extends React.Component {
     this.state = {
       size: 'default',
     }
+  }
+  componentDidmount() {
+    http.get({},{})
+      .then(console.log())
+      
+  }
+  setConfig() {
+
   }
   handleDateChange(e) {
 // console.log(e.target);
@@ -83,7 +93,7 @@ class Dashboard extends React.Component {
             <p>链接请求</p>
           </Col>
           <Col className="" md={15}>
-            <IndexTableCard needToday="false" default="yesterday" columns={Columns.linkQuest} name="链接请求Top5" needMore="true" />
+            <IndexTableCard needToday="false" default="yesterday" columns={Columns.linkQuest}  name="链接请求Top5" needMore="true" />
           </Col>
           <Col className="" md={9}>
             <IndexTableCard needToday="false" default="yesterday" columns={Columns.failStatus} name="失败状态Top5" needMore="true" />

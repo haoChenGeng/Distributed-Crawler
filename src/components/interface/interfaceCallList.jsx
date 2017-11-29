@@ -105,6 +105,15 @@ class InterfaceCallList extends React.Component {
       },
     }];    
   } 
+
+  
+  handle(e) {
+    console.log(e.target.value);
+    console.log(e);
+    this.setState({
+      searchValue: e.target.value
+    })
+  }
   searchInterfaceCallTable(e) {
 console.log(e);
   }
@@ -140,7 +149,7 @@ console.log(record);
                   <Option value="searchKey">App Key</Option>
                   <Option value="searchName">接口名称</Option >
                 </Select>
-                <Input style={{ width: '25%' }} size="large" defaultValue="请输入搜索内容" suffix={suffix} value={searchValue} /><Button type="primary" size="large" style={{ backgroundColor: '#49a9ee',border: '#49a9ee' }}>搜索</Button>
+                <Input style={{ width: '25%' }} size="large" defaultValue="请输入搜索内容" value={searchValue} ref="123" suffix={suffix} onChange={this.handle.bind(this)} /><Button type="primary" size="large"  style={{ backgroundColor: '#49a9ee',border: '#49a9ee' }}>搜索</Button>
               </InputGroup>
               <Tabs type="card" style={{ marginTop: '10px' }} onChange={this.searchInterfaceCallTable} >
                 <TabPane tab="所有" key="1">
