@@ -5,36 +5,35 @@ class IndexTable extends React.Component {
   constructor(props) {
     super(props);
     this.worker = {
-      "pagination": {
-        "pages": 10,
-        "total": 104,
-        "pageSize": 10,
-        "pageNum": 2
+      pagination: {
+        pages: 10,
+        total: 104,
+        pageSize: 10,
+        pageNum: 2
       },
-      "result": [
+      result: [
         {
-          "systemIp": "12-34",
-          "contextPath": "Windows",
-          "workerType": "10.8.23.1",
-          "runSystem": "xxx/test",
-          "startTime": "20",
-          "lastHeartbeatTime": "CRAWLER-1",
-          "status": "10"
-        }, {
-          "systemIp": "56-78",
-          "contextPath": "Windows",
-          "workerType": "10.8.23.1",
-          "runSystem": "xxx/test",
-          "startTime": "30",
-          "lastHeartbeatTime": "CRAWLER-1",
-          "status": "10"
+          systemIp: '12-34',
+          contextPath: 'Windows',
+          workerType: '10.8.23.1',
+          runSystem: 'xxx/test',
+          startTime: '20',
+          lastHeartbeatTime: 'CRAWLER-1',
+          status: '10'
+        },
+        {
+          systemIp: '56-78',
+          contextPath: 'Windows',
+          workerType: '10.8.23.1',
+          runSystem: 'xxx/test',
+          startTime: '30',
+          lastHeartbeatTime: 'CRAWLER-1',
+          status: '10'
         }
       ]
-    }    
-  }  
-  state = {
-
+    };
   }
+  state = {};
   showWorkerDetail(record) {
     console.log(record);
     Modal.info({
@@ -53,14 +52,14 @@ class IndexTable extends React.Component {
         </div>
       ),
       okText: '确定'
-    })
+    });
   }
   render() {
     const data = this.worker.result;
-    const dataSource = data.map((item) => {
+    const dataSource = data.map(item => {
       item['key'] = item.workerId;
       return item;
-    })
+    });
     const { columns } = this.props;
 
     return <Table dataSource={this.props.dataSource} columns={this.props.columns} pagination={this.props.pagination} />;

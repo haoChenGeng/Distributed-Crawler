@@ -17,24 +17,20 @@ import * as http from '../../axios/tools';
 
 class Dashboard extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
-      size: 'default',
-    }
+      size: 'default'
+    };
   }
   componentDidmount() {
-    http.get({},{})
-      .then(console.log())
-      
+    http.get({}, {}).then(console.log());
   }
-  setConfig() {
-
-  }
+  setConfig() {}
   handleDateChange(e) {
-// console.log(e.target);
+    // console.log(e.target);
     this.setState({
       size: e.target.value
-    })
+    });
   }
   render() {
     const count = 123;
@@ -78,40 +74,100 @@ class Dashboard extends React.Component {
             <p>接口调用</p>
           </Col>
           <Col className="" md={15}>
-            <IndexTableCard needToday="true" default="today" columns={Columns.interfaceQuery} name="接口调用Top5" needMore="true" />
+            <IndexTableCard
+              needToday="true"
+              default="today"
+              columns={Columns.interfaceQuery}
+              name="接口调用Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={9}>
-            <IndexTableCard needToday="true" default="today" columns={Columns.interfaceApp} name="调用方Top5" needMore="true" />
+            <IndexTableCard
+              needToday="true"
+              default="today"
+              columns={Columns.interfaceApp}
+              name="调用方Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={15} style={{ marginTop: 10 }}>
-            <IndexTableCard needToday="true" default="today" name="调用次数及成功率趋势" option={Options.lineOption} needMore="false" />
+            <IndexTableCard
+              needToday="true"
+              default="today"
+              name="调用次数及成功率趋势"
+              option={Options.lineOption}
+              needMore="false"
+            />
           </Col>
           <Col className="" md={9} style={{ marginTop: 10 }}>
-            <IndexTableCard needToday="true" default="today" name="响应时间分布" option={Options.barOption} needMore="false" />
+            <IndexTableCard
+              needToday="true"
+              default="today"
+              name="响应时间分布"
+              option={Options.barOption}
+              needMore="false"
+            />
           </Col>
           <Col className="" md={24}>
             <p>链接请求</p>
           </Col>
           <Col className="" md={15}>
-            <IndexTableCard needToday="false" default="yesterday" columns={Columns.linkQuest}  name="链接请求Top5" needMore="true" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              columns={Columns.linkQuest}
+              name="链接请求Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={9}>
-            <IndexTableCard needToday="false" default="yesterday" columns={Columns.failStatus} name="失败状态Top5" needMore="true" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              columns={Columns.failStatus}
+              name="失败状态Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={24} style={{ marginTop: 10 }}>
-            <IndexTableCard needToday="false" default="yesterday" name="链接请求及成功率趋势" option={Options.lineOption} needMore="false" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              name="链接请求及成功率趋势"
+              option={Options.lineOption}
+              needMore="false"
+            />
           </Col>
           <Col className="" md={24}>
             <p>数据量</p>
           </Col>
           <Col className="" md={15}>
-            <IndexTableCard needToday="false" default="yesterday" columns={Columns.dbRecord} name="入库记录数Top5" needMore="true" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              columns={Columns.dbRecord}
+              name="入库记录数Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={9}>
-            <IndexTableCard needToday="false" default="yesterday" columns={Columns.dataCount} name="库数据量Top5" needMore="true" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              columns={Columns.dataCount}
+              name="库数据量Top5"
+              needMore="true"
+            />
           </Col>
           <Col className="" md={24} style={{ marginTop: 10 }}>
-            <IndexTableCard needToday="false" default="yesterday" name="入库记录数趋势" option={Options.lineOption} needMore="false" />
+            <IndexTableCard
+              needToday="false"
+              default="yesterday"
+              name="入库记录数趋势"
+              option={Options.lineOption}
+              needMore="false"
+            />
           </Col>
           {/* <Col className="gutter-row" md={8}>
             <div className="gutter-box">
@@ -203,7 +259,7 @@ class Dashboard extends React.Component {
           </Col> */}
         </Row>
       </div>
-    )
+    );
   }
 }
 

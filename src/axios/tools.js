@@ -18,9 +18,9 @@ export const get = ({ url, data, headers }) =>
   .then(res => res.data)
   .catch(error => {
     console.dir(error);
-    if (error.response.status !== 200) {
-      message.warn(error.response.data.errmsg);
-    }
+    // if (error.response.status !== 200) {
+    //   message.warn(error.response.data.errmsg);
+    // }
   });
 
 /**
@@ -35,9 +35,9 @@ export const post = ({ url, data, headers = { Accept: 'application/json' } }) =>
   .then(res => res.data)
   .catch(error => {
     console.dir(error);
-    if (error.response.status !== 200) {
-      message.warn(error.response.data.errmsg);
-    }
+    // if (error.response.status !== 200) {
+    //   message.warn(error.response.data.errmsg);
+    // }
   });
 
 /**
@@ -52,7 +52,7 @@ export const put = ({ url, data, headers }) =>
   .then(res => res.data)
   .catch(error => {
     console.dir(error);
-    if (error.response.status !== 200) {
-      message.warn(error.response.data.errmsg);
-    }
+    // if (error.response.status !== 200) {
+    //   message.warn(error.response.data.errmsg);
+    // }
   })
